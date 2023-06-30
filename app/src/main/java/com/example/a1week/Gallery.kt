@@ -62,7 +62,6 @@ class Gallery : Fragment() {
                 dlg.setNegativeButton("닫기", null)
                 dlg.show()
             }
-
             return imageView
         }
     }
