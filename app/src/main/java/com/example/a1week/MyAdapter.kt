@@ -1,13 +1,10 @@
 package com.example.a1week
 
-import android.content.Context
-import android.widget.Gallery
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 @Suppress("DEPRECATION")
 internal class MyAdapter(
-    var context: Context,
     fm: FragmentManager,
     var totalTabs: Int
 ) :
@@ -15,7 +12,7 @@ internal class MyAdapter(
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
-                Call()
+                ContactFragment()
             }
             1 -> {
                 Gallery()

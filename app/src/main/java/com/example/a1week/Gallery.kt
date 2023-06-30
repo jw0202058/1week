@@ -27,11 +27,10 @@ class Gallery : Fragment() {
 
     inner class MyGridAdapter(private val context: Context) : BaseAdapter() {
         private val picID = arrayOf<Int>(
-            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
-            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
-            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
-            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
-            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+                                                                                                                        R.drawable.img2, R.drawable.img2, R.drawable.img2, R.drawable.img2, R.drawable.img2,
+            R.drawable.img2, R.drawable.img2, R.drawable.img2, R.drawable.img2, R.drawable.img2,
+            R.drawable.img2, R.drawable.img2, R.drawable.img2, R.drawable.img2, R.drawable.img2,
+            R.drawable.img2, R.drawable.img2, R.drawable.img2, R.drawable.img2, R.drawable.img2,
         )
 
         override fun getCount(): Int {
