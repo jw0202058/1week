@@ -1,7 +1,7 @@
 package com.example.a1week
 
 import android.content.Context
-import android.widget.Gallery
+import android.telecom.Call
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -15,7 +15,7 @@ internal class MyAdapter(
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
-                Call()
+                ContactFragment()
             }
             1 -> {
                 Gallery()
