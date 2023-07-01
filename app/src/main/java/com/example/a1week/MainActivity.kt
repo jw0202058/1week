@@ -15,9 +15,9 @@ class MainActivity : AppCompatActivity() {
         title = "KotlinApp"
         tabLayout = findViewById(R.id.tabLayout)
         viewPager = findViewById(R.id.viewPager)
-        tabLayout.addTab(tabLayout.newTab().setText("Call"))
+        tabLayout.addTab(tabLayout.newTab().setText("Contact"))
         tabLayout.addTab(tabLayout.newTab().setText("Gallery"))
-        tabLayout.addTab(tabLayout.newTab().setText("Tap3"))
+        tabLayout.addTab(tabLayout.newTab().setText("TodoList"))
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         val adapter = MyAdapter(this, supportFragmentManager,
             tabLayout.tabCount)

@@ -1,10 +1,12 @@
 package com.example.a1week
 
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 @Suppress("DEPRECATION")
 internal class MyAdapter(
+    var context: Context,
     fm: FragmentManager,
     var totalTabs: Int
 ) :
@@ -18,7 +20,7 @@ internal class MyAdapter(
                 Gallery()
             }
             2 -> {
-                Tap3()
+                TodoList()
             }
             else -> getItem(position)
         }
