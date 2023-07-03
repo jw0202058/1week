@@ -52,7 +52,10 @@ class TodoList : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun deleteTask(todo: Todo) {
-        data.remove(todo)
-        binding.recyclerView.adapter?.notifyDataSetChanged()
+        val position = data.indexOf(todo)
+        if (position != -1) {
+            data.removeAt(position)
+            binding.recyclerView.adapter?.notifyItemRemoved(position)
+        }
     }
 }
