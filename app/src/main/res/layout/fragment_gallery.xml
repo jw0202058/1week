@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Gallery">
+    tools:context=".Gallery"
+    android:orientation="horizontal">
     <!-- TODO: Update blank fragment layout -->
     <GridView
         android:id="@+id/gridView"
@@ -12,4 +13,8 @@
         android:numColumns="5"
         android:gravity="center"
         />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerGridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

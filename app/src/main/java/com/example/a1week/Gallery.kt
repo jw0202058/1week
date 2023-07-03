@@ -12,9 +12,12 @@ import android.widget.GridView
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 
+
+
 class Gallery : Fragment() {
 
-    override fun onCreateView(
+    @SuppressLint("MissingInflatedId")
+    override fun onCreateView(              // 생성된 뷰를 반환하여 화면에 보여 줌
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -26,9 +29,23 @@ class Gallery : Fragment() {
     }
 
     inner class MyGridAdapter(private val context: Context) : BaseAdapter() {
-        private val picID = arrayOf<Int>(
-            R.drawable.img1
-        )
+
+        private val picID = arrayOf<Int>(           // 사진 받아오기
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1,
+            )
 
         override fun getCount(): Int {
             return picID.size
@@ -42,14 +59,14 @@ class Gallery : Fragment() {
             return 0
         }
 
-        @SuppressLint("ViewHolder")
+        @SuppressLint("ViewHolder")         // 받아온 사진을 앞서 있던 뷰 말고 다른 뷰에 할당하여 화면에 띄우기
         override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
             val imageView = ImageView(context)
             imageView.layoutParams = ViewGroup.LayoutParams(200, 300)
             imageView.scaleType = ImageView.ScaleType.FIT_CENTER
             imageView.setImageResource(picID[i])
 
-            imageView.setOnClickListener {
+            imageView.setOnClickListener {      // imageView 누르면 나타나는 일
                 val dialogView = View.inflate(requireContext(), R.layout.dialog, null)
                 val dlg = AlertDialog.Builder(requireContext())
                 val ivPic = dialogView.findViewById<ImageView>(R.id.ivPic)
@@ -59,6 +76,7 @@ class Gallery : Fragment() {
                 dlg.setNegativeButton("닫기", null)
                 dlg.show()
             }
+
             return imageView
         }
     }

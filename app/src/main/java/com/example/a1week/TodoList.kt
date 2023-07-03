@@ -13,7 +13,6 @@ class TodoList : Fragment() {
 
     private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
-
     private val data = arrayListOf<Todo>()
 
     override fun onCreateView(
@@ -30,9 +29,8 @@ class TodoList : Fragment() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = TodoAdapter(data,
-            onClickDeleteIcon = {
-                deleteTask(it)
-            }
+            onClickDeleteIcon =
+                ::deleteTask,
         )
 
         binding.addButton.setOnClickListener {
@@ -47,7 +45,7 @@ class TodoList : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun addTask() {
-        val todo = Todo(binding.editText.text.toString())
+        val todo = Todo(binding.editText.text.toString(), isDone=false)
         data.add(todo)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
