@@ -111,10 +111,8 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
                 val contacts = mutableListOf<Contact>()
 
                 while (it.moveToNext()) {
-                    val id =
-                        it.getString(it.getColumnIndex(ContactsContract.Contacts._ID))
-                    val name =
-                        it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                    val id = it.getString(it.getColumnIndex(ContactsContract.Contacts._ID))
+                    val name = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
 
                     val phoneCursor = contentResolver.query(
                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
@@ -125,9 +123,8 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
                     )
 
                     phoneCursor?.let { phoneCursor ->
-                        if (phoneCursor.moveToNext()) {
-                            val phoneNumber =
-                                phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                        while (phoneCursor.moveToNext()) {
+                            val phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
                             val contact = Contact(id, name, phoneNumber)
                             contacts.add(contact)
                         }
@@ -142,6 +139,7 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
             it.close()
         }
     }
+
 
     @SuppressLint("Range")
     private fun getContactPhotoUri(contactId: String): Uri? {

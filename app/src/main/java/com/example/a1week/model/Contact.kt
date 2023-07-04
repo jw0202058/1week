@@ -1,5 +1,7 @@
 package com.example.a1week.model
 
+import android.net.Uri
+
 //import android.content.Context
 //import org.json.JSONArray
 //import org.json.JSONObject
@@ -7,12 +9,13 @@ package com.example.a1week.model
 //import java.io.IOException
 //import java.io.InputStreamReader
 //import java.io.OutputStreamWriter
-
 data class Contact(
     val contactId: String,
     val name: String,
-    val phoneNumber: String
+    val phoneNumber: String,
+//    val photoUri: Uri? // Add the photoUri property
 )
+
 //
 //object ContactManager {
 //    private const val FILE_NAME = "Contacts.json"
