@@ -48,6 +48,7 @@ class TodoList : Fragment() {
         val todo = Todo(binding.editText.text.toString(), isDone=false)
         data.add(todo)
         binding.recyclerView.adapter?.notifyDataSetChanged()
+        binding.editText.text = null            // 입력창 초기화
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -58,4 +59,5 @@ class TodoList : Fragment() {
             binding.recyclerView.adapter?.notifyItemRemoved(position)
         }
     }
+
 }
