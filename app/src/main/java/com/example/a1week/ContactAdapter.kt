@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a1week.model.Contact
 
@@ -19,8 +19,11 @@ class ContactAdapter(private var contactClickListener: OnContactClickListener) :
     }
 
     interface OnContactClickListener {
+
         fun onContactClick(contact: Contact, position: Int)
         fun onContactLongClick(contact: Contact, position: Int)
+        fun onDialButtonClick(contact: Contact, position: Int)
+        fun onMsgButtonClick(contact: Contact, position: Int)
     }
 
     fun setContactClickListener(onContactClickListener: OnContactClickListener) {
@@ -29,6 +32,8 @@ class ContactAdapter(private var contactClickListener: OnContactClickListener) :
 
     // ViewHolder class for the individual items in the RecyclerView
     inner class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val dialButton: AppCompatImageButton  = itemView.findViewById(R.id.BtnDial)
+        val msgButton: AppCompatImageButton = itemView.findViewById(R.id.BtnMsg)
         init {
             itemView.setOnClickListener {
                 val position = adapterPosition
@@ -45,6 +50,22 @@ class ContactAdapter(private var contactClickListener: OnContactClickListener) :
                     contactClickListener.onContactLongClick(contact, position)
                 }
                 true
+            }
+
+            dialButton.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val contact = contactList[position]
+                    contactClickListener.onDialButtonClick(contact, position)
+                }
+            }
+
+            msgButton.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val contact = contactList[position]
+                    contactClickListener.onMsgButtonClick(contact, position)
+                }
             }
 
         }
@@ -65,6 +86,8 @@ class ContactAdapter(private var contactClickListener: OnContactClickListener) :
             findViewById<TextView>(R.id.txtName).text = contact.name
             findViewById<TextView>(R.id.txtPhoneNumber).text = contact.phoneNumber
         }
+
+
     }
 
     override fun getItemCount(): Int {
