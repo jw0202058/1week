@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a1week.databinding.ItemListBinding
-import com.google.gson.Gson
-
 
 data class Todo(
     var text: String,
@@ -80,7 +78,13 @@ class TodoAdapter(
         }
 
         todoViewHolder.binding.root.setOnLongClickListener {
-            showEditDialog(todoViewHolder.binding.root.context, todo)
+            showEditDialog(todoViewHolder.binding.root.context, todo,             onConfirm = { updatedText ->
+                todo.text = updatedText
+                notifyItemChanged(position)
+
+                // 수정된 데이터 저장
+                saveData(dataSet)
+            })
             true
         }
 //추가시작
@@ -91,7 +95,7 @@ class TodoAdapter(
     }
 
     @SuppressLint("MissingInflatedId")
-    private fun showEditDialog(context: Context, todo: Todo) {
+    private fun showEditDialog(context: Context, todo: Todo,  onConfirm: (updatedText: String) -> Unit ) {
         val dialogBuilder = AlertDialog.Builder(context)
         val dialogView = LayoutInflater.from(context)
             .inflate(R.layout.dialog_edit_todo, null)
@@ -102,6 +106,7 @@ class TodoAdapter(
             .setTitle("할 일 수정")
             .setPositiveButton("확인") { dialog, _ ->
                 val updatedText = editText.text.toString()
+                onConfirm(updatedText) // 콜백 함수 호출
                 todo.text = updatedText
                 notifyItemChanged(dataSet.indexOf(todo))
                 dialog.dismiss()
