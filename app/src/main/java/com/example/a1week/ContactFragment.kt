@@ -137,6 +137,7 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
             }
 
             it.close()
+
         }
     }
 
