@@ -19,14 +19,17 @@
 
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/contact_photo_imageview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@mipmap/ic_launcher"
-                tools:layout_editor_absoluteY="0dp"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars"
+                android:contentDescription="TODO" />
 
 
             <TextView
@@ -35,10 +38,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="이름"
+                android:text="@string/contact_text_name"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/contact_photo_imageview"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -47,12 +50,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginBottom="32dp"
-                android:text="전화번호"
+                android:text="@string/contact_text_phoneNumber"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textColor="#FF0000FF"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView" />
+                app:layout_constraintStart_toEndOf="@+id/contact_photo_imageview" />
 
             <ImageButton
                 android:id="@+id/BtnDial"
@@ -65,7 +68,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/BtnMsg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/baseline_call_24" />
+                app:srcCompat="@drawable/baseline_call_24"
+                android:contentDescription="DialIcon" />
 
             <ImageButton
                 android:id="@+id/BtnMsg"
@@ -78,7 +82,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/BtnDial"
-                app:srcCompat="@drawable/baseline_message_24" />
+                app:srcCompat="@drawable/baseline_message_24"
+                android:contentDescription="SMSIcon" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

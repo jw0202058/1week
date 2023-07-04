@@ -5,12 +5,15 @@ import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -58,6 +61,14 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
         // Handle item click event
         Toast.makeText(context, "Clicked on ${contact.name}", Toast.LENGTH_SHORT).show()
         // Implement your desired action for clicking a contact
+
+        // Retrieve the contact's photo
+        val photoUri = getContactPhotoUri(contact.contactId)
+        photoUri?.let { uri ->
+            val resolver: ContentResolver = requireContext().contentResolver
+            val photoBitmap = MediaStore.Images.Media.getBitmap(resolver, uri)
+            showContactPhoto(photoBitmap)
+        }
     }
 
     override fun onContactLongClick(contact: Contact, position: Int) {
@@ -69,20 +80,18 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
     override fun onDialButtonClick(contact: Contact, position: Int) {
         Toast.makeText(context, "Dial to ${contact.name}", Toast.LENGTH_SHORT).show()
         val phoneNumber = contact.phoneNumber
-        val phoneNumUri = Uri.parse("tel:${phoneNumber}")
+        val phoneNumUri = Uri.parse("tel:$phoneNumber")
         val dialIntent = Intent(Intent.ACTION_DIAL, phoneNumUri)
         startActivity(dialIntent)
     }
 
     override fun onMsgButtonClick(contact: Contact, position: Int) {
-        val smsIntent = Intent(Intent.ACTION_VIEW)
         val phoneNumber = contact.phoneNumber
-        val phoneNumUri = Uri.parse("smsto:${phoneNumber}")
+        val phoneNumUri = Uri.parse("smsto:$phoneNumber")
         val msgIntent = Intent(Intent.ACTION_SENDTO, phoneNumUri)
         msgIntent.putExtra("sms_body", "Here goes your message...")
         startActivity(msgIntent)
     }
-
 
     @SuppressLint("Range")
     private fun loadContacts() {
@@ -119,7 +128,7 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
                         if (phoneCursor.moveToNext()) {
                             val phoneNumber =
                                 phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-                            val contact = Contact(name, phoneNumber)
+                            val contact = Contact(id, name, phoneNumber)
                             contacts.add(contact)
                         }
 
@@ -132,6 +141,39 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
 
             it.close()
         }
+    }
+
+    @SuppressLint("Range")
+    private fun getContactPhotoUri(contactId: String): Uri? {
+        val contentResolver: ContentResolver = requireContext().contentResolver
+        val projection = arrayOf(ContactsContract.Contacts.PHOTO_URI)
+        val selection = ContactsContract.Contacts._ID + " = ?"
+        val selectionArgs = arrayOf(contactId)
+        val cursor = contentResolver.query(
+            ContactsContract.Contacts.CONTENT_URI,
+            projection,
+            selection,
+            selectionArgs,
+            null
+        )
+
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val photoUriString = it.getString(it.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
+                if (photoUriString != null) {
+                    return Uri.parse(photoUriString)
+                }
+            }
+        }
+
+        return null
+    }
+
+
+    private fun showContactPhoto(bitmap: Bitmap) {
+        // Display the contact photo in an ImageView
+        val imageView: ImageView = requireView().findViewById(R.id.contact_photo_imageview)
+        imageView.setImageBitmap(bitmap)
     }
 
     override fun onRequestPermissionsResult(
