@@ -3,11 +3,13 @@ package com.example.a1week
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a1week.model.Contact
 
-class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+class ContactAdapter(private var contactClickListener: OnContactClickListener) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
     private val contactList: MutableList<Contact> = mutableListOf()
 
     fun setData(data: List<Contact>) {
@@ -16,9 +18,36 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() 
         notifyDataSetChanged()
     }
 
+    interface OnContactClickListener {
+        fun onContactClick(contact: Contact, position: Int)
+        fun onContactLongClick(contact: Contact, position: Int)
+    }
+
+    fun setContactClickListener(onContactClickListener: OnContactClickListener) {
+        contactClickListener = onContactClickListener
+    }
+
     // ViewHolder class for the individual items in the RecyclerView
-    class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // Initialize views within the item layout if needed
+    inner class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val contact = contactList[position]
+                    contactClickListener.onContactClick(contact, position)
+                }
+            }
+
+            itemView.setOnLongClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val contact = contactList[position]
+                    contactClickListener.onContactLongClick(contact, position)
+                }
+                true
+            }
+
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
@@ -27,6 +56,7 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() 
         )
         return ContactViewHolder(itemView)
     }
+
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val contact = contactList[position]
