@@ -62,13 +62,13 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
         Toast.makeText(context, "Clicked on ${contact.name}", Toast.LENGTH_SHORT).show()
         // Implement your desired action for clicking a contact
 
-        // Retrieve the contact's photo
-        val photoUri = contact.photoUri
-        photoUri?.let { uri ->
-            val resolver: ContentResolver = requireContext().contentResolver
-            val photoBitmap = MediaStore.Images.Media.getBitmap(resolver, uri)
-            showContactPhoto(photoBitmap)
-        }
+//        // Retrieve the contact's photo
+//        val photoUri = contact.photoUri
+//        photoUri?.let { uri ->
+//            val resolver: ContentResolver = requireContext().contentResolver
+//            val photoBitmap = MediaStore.Images.Media.getBitmap(resolver, uri)
+//            showContactPhoto(photoBitmap)
+//        }
     }
 
     override fun onContactLongClick(contact: Contact, position: Int) {
@@ -122,15 +122,15 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
                         null
                     )
 
-                    phoneCursor?.let { phoneCursor ->
-                        while (phoneCursor.moveToNext()) {
-                            val phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-                            val contact = Contact(id, name, phoneNumber, photoUri = null)
-                            contacts.add(contact)
-                        }
-
-                        phoneCursor.close()
-                    }
+//                    phoneCursor?.let { phoneCursor ->
+//                        while (phoneCursor.moveToNext()) {
+//                            val phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+//                            val contact = Contact(id, name, phoneNumber, photoUri = null)
+//                            contacts.add(contact)
+//                        }
+//
+//                        phoneCursor.close()
+//                    }
                 }
 
                 adapter.setData(contacts)
@@ -141,38 +141,38 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
     }
 
 
-    @SuppressLint("Range")
-    private fun getContactPhotoUri(contactId: String): Uri? {
-        val contentResolver: ContentResolver = requireContext().contentResolver
-        val projection = arrayOf(ContactsContract.Contacts.PHOTO_URI)
-        val selection = ContactsContract.Contacts._ID + " = ?"
-        val selectionArgs = arrayOf(contactId)
-        val cursor = contentResolver.query(
-            ContactsContract.Contacts.CONTENT_URI,
-            projection,
-            selection,
-            selectionArgs,
-            null
-        )
-
-        cursor?.use {
-            if (it.moveToFirst()) {
-                val photoUriString = it.getString(it.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
-                if (photoUriString != null) {
-                    return Uri.parse(photoUriString)
-                }
-            }
-        }
-
-        return null
-    }
-
-
-    private fun showContactPhoto(bitmap: Bitmap) {
-        // Display the contact photo in an ImageView
-        val imageView: ImageView = requireView().findViewById(R.id.contact_photo_imageview)
-        imageView.setImageBitmap(bitmap)
-    }
+//    @SuppressLint("Range")
+//    private fun getContactPhotoUri(contactId: String): Uri? {
+//        val contentResolver: ContentResolver = requireContext().contentResolver
+//        val projection = arrayOf(ContactsContract.Contacts.PHOTO_URI)
+//        val selection = ContactsContract.Contacts._ID + " = ?"
+//        val selectionArgs = arrayOf(contactId)
+//        val cursor = contentResolver.query(
+//            ContactsContract.Contacts.CONTENT_URI,
+//            projection,
+//            selection,
+//            selectionArgs,
+//            null
+//        )
+//
+//        cursor?.use {
+//            if (it.moveToFirst()) {
+//                val photoUriString = it.getString(it.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
+//                if (photoUriString != null) {
+//                    return Uri.parse(photoUriString)
+//                }
+//            }
+//        }
+//
+//        return null
+//    }
+//
+//
+//    private fun showContactPhoto(bitmap: Bitmap) {
+//        // Display the contact photo in an ImageView
+//        val imageView: ImageView = requireView().findViewById(R.id.contact_photo_imageview)
+//        imageView.setImageBitmap(bitmap)
+//    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
