@@ -63,7 +63,7 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
         // Implement your desired action for clicking a contact
 
         // Retrieve the contact's photo
-        val photoUri = getContactPhotoUri(contact.contactId)
+        val photoUri = contact.photoUri
         photoUri?.let { uri ->
             val resolver: ContentResolver = requireContext().contentResolver
             val photoBitmap = MediaStore.Images.Media.getBitmap(resolver, uri)
@@ -125,7 +125,7 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
                     phoneCursor?.let { phoneCursor ->
                         while (phoneCursor.moveToNext()) {
                             val phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-                            val contact = Contact(id, name, phoneNumber)
+                            val contact = Contact(id, name, phoneNumber, photoUri = null)
                             contacts.add(contact)
                         }
 
