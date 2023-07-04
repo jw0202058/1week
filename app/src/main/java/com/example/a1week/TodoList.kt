@@ -16,6 +16,7 @@ class TodoList : Fragment() {
     private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
     private val data = arrayListOf<Todo>()
+    private var isDataLoaded = false // 데이터 로드 여부를 나타내는 플래그 변수
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +31,11 @@ class TodoList : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 데이터 초기화
-        loadData()
+        // 데이터가 로드되지 않은 경우에만 loadData() 호출
+        if (!isDataLoaded) {
+            loadData()
+            isDataLoaded = true
+        }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = TodoAdapter(data,
