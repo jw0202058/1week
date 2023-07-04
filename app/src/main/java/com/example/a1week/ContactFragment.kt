@@ -122,15 +122,15 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
                         null
                     )
 
-//                    phoneCursor?.let { phoneCursor ->
-//                        while (phoneCursor.moveToNext()) {
-//                            val phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-//                            val contact = Contact(id, name, phoneNumber, photoUri = null)
-//                            contacts.add(contact)
-//                        }
-//
-//                        phoneCursor.close()
-//                    }
+                    phoneCursor?.let { phoneCursor ->
+                        while (phoneCursor.moveToNext()) {
+                            val phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                            val contact = Contact(id, name, phoneNumber, photoUri = null)
+                            contacts.add(contact)
+                        }
+
+                        phoneCursor.close()
+                    }
                 }
 
                 adapter.setData(contacts)
