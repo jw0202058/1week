@@ -9,14 +9,18 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a1week.databinding.ItemListBinding
+import com.google.gson.Gson
+
 
 data class Todo(
     var text: String,
     var isDone: Boolean = false,
     var isCheckBoxVisible: Boolean = false
 )
+
 class TodoAdapter(
     private val dataSet: List<Todo>,
+    private val saveData: (todoList: List<Todo>) -> Unit, // 추가된 부분
 //추가시작
     private val onClickDeleteIcon: (todo: Todo) -> Unit, //2. delete button이 눌렸을때 onclickDeleteIcon을 실행하라는뜻, 0->Unit이기때문에 함수자체에 return없다는뜻
 
@@ -64,10 +68,14 @@ class TodoAdapter(
             if (todo.isCheckBoxVisible) {
                 todo.isCheckBoxVisible = false
                 notifyItemChanged(position)
+
+                saveData(dataSet)
             }
             else {
                 todo.isCheckBoxVisible = true
                 notifyItemChanged(position)
+
+                saveData(dataSet)
             }
         }
 
