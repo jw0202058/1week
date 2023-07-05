@@ -73,9 +73,9 @@
   ```
     - gAdapter.addImage(bitmap) 함수를 호출하여 이미지를 GridView에 추가
 <br>
-- 애플리케이션 내부 저장소에 사진 저장
-  - addImageToStorage(bitmap) 함수를 호출하여 이미지를 내부 저장소에 저장
-  ``` kotlin
+  - 애플리케이션 내부 저장소에 사진 저장
+    - addImageToStorage(bitmap) 함수를 호출하여 이미지를 내부 저장소에 저장
+    ``` kotlin
       private fun addImageToStorage(bitmap: Bitmap) {
         try {
             val imageFileName = "image_${System.currentTimeMillis()}.png"
@@ -91,7 +91,7 @@
             ).show()
         }
     }
-  ```
+    ```
 - 사진 삭제
 
 
