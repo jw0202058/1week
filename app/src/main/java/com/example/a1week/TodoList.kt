@@ -73,7 +73,7 @@ class TodoList : Fragment() {
             saveData(data) // 삭제된 데이터를 내부 저장소에 저장
         }
     }
-    fun saveData(todoList: List<Todo>) {
+    private fun saveData(todoList: List<Todo>) {
         val sharedPreferences = requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 

@@ -15,9 +15,9 @@ class MainActivity : AppCompatActivity() {
         title = "KotlinApp"
         tabLayout = findViewById(R.id.tabLayout)
         viewPager = findViewById(R.id.viewPager)
-        tabLayout.addTab(tabLayout.newTab().setText("Contact"))
-        tabLayout.addTab(tabLayout.newTab().setText("Gallery"))
-        tabLayout.addTab(tabLayout.newTab().setText("TodoList"))
+        tabLayout.addTab(tabLayout.newTab().setText("Contact").setIcon(R.drawable.baseline_contact_page_24))
+        tabLayout.addTab(tabLayout.newTab().setText("Gallery").setIcon(R.drawable.baseline_photo_library_24))
+        tabLayout.addTab(tabLayout.newTab().setText("TodoList").setIcon(R.drawable.baseline_check_circle_outline_24))
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         val adapter = MyAdapter(this, supportFragmentManager,
             tabLayout.tabCount)
