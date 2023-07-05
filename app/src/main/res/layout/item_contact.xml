@@ -30,7 +30,7 @@
             android:orientation="horizontal">
 
 
-            <ImageView
+            <com.example.a1week.CircularImageView
                 android:id="@+id/contact_photo_imageview"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -48,7 +48,8 @@
 
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-<!--            <androidx.cardview.widget.CardView-->
+
+            <!--            <androidx.cardview.widget.CardView-->
 <!--                android:id="@+id/cardView"-->
 <!--                android:layout_width="100dp"-->
 <!--                android:layout_height="100dp"-->
