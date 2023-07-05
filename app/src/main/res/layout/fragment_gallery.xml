@@ -16,6 +16,14 @@
 
     </GridView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="24dp"
+        android:backgroundTint="#A980F3"
+        android:src="@drawable/plus" />
 <!--    <androidx.recyclerview.widget.RecyclerView-->
 <!--        android:id="@+id/recyclerGridView"-->
 <!--        android:layout_width="match_parent"-->
