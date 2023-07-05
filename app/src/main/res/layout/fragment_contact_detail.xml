@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_contact_detail.xml -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <!-- fragment_contact_detail.xml -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/contact_imageview"
+                android:layout_width="match_parent"
+                android:layout_height="453dp"
+                android:adjustViewBounds="true"
+                android:minWidth="300dp"
+                android:minHeight="300dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/contact_name_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:padding="16dp"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/contact_phone_number_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:padding="16dp"
+                android:textSize="18sp" />
+
+            <!-- Add more TextViews or other UI elements for additional contact details -->
+            <!-- For example, you can add TextViews for email, address, etc. -->
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- Add more TextViews or other UI elements for additional contact details -->
+
+</FrameLayout>

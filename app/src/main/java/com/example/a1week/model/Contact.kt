@@ -9,12 +9,44 @@ import android.net.Uri
 //import java.io.IOException
 //import java.io.InputStreamReader
 //import java.io.OutputStreamWriter
+import java.io.Serializable
+import android.os.Parcel
+import android.os.Parcelable
+
 data class Contact(
-    val contactId: String,
-    val name: String,
-    val phoneNumber: String,
-    val photoUri: Uri? // Add the photoUri property
-)
+    val id: String?,
+    val name: String?,
+    val phoneNumber: String?,
+    val photoUri: Uri?
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readParcelable(Uri::class.java.classLoader)
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
+        parcel.writeString(name)
+        parcel.writeString(phoneNumber)
+        parcel.writeParcelable(photoUri, flags)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Contact> {
+        override fun createFromParcel(parcel: Parcel): Contact {
+            return Contact(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Contact?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
 
 //
 //object ContactManager {
