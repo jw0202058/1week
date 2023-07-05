@@ -73,9 +73,45 @@
     }
   ```
   - 사용자가 이미지를 선택하면 onActivityResult() 메서드가 호출되고 선택한 이미지를 Bitmap으로 변환
+  ``` kotlin
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == RESULT_OK && data != null) {
+            val selectedImageUri: Uri? = data.data
+            if (selectedImageUri != null) {
+                val bitmap = decodeUriToBitmap(requireContext(), selectedImageUri)
+                if (bitmap != null) {
+                    gAdapter.addImage(bitmap)
+                    addImageToStorage(bitmap) // Save image to internal storage
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Failed to load image",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+  ```
   - gAdapter.addImage(bitmap)와 addImageToStorage(bitmap) 함수를 호출하여 이미지를 GridView에 추가
   - 애플리케이션 내부 저장소에 할 일 저장
-
+  ``` kotlin
+      private fun addImageToStorage(bitmap: Bitmap) {
+        try {
+            val imageFileName = "image_${System.currentTimeMillis()}.png"
+            val fileOutputStream = requireContext().openFileOutput(imageFileName, Context.MODE_PRIVATE)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
+            fileOutputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(
+                requireContext(),
+                "Failed to save image",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+  ```
 - 할 일 수정
   - setOnLongClickListener
 ```
