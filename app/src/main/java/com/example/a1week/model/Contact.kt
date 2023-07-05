@@ -13,7 +13,7 @@ data class Contact(
     val contactId: String,
     val name: String,
     val phoneNumber: String,
-//    val photoUri: Uri? // Add the photoUri property
+    val photoUri: Uri? // Add the photoUri property
 )
 
 //
