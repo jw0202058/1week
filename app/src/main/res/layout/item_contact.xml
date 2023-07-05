@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:elevation="50dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -14,41 +15,28 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:cardBackgroundColor="#F6F1C2"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:cardMaxElevation="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/white"
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="127dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:strokeWidth="3dp"
+            app:strokeColor="#f00"
+            app:cardCornerRadius="10dp"
+            >
 
 
-            <ImageView
-                android:id="@+id/contact_photo_imageview"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/round_outline"
-                android:clipToOutline="true"
-                android:contentDescription="TODO"
-                android:padding="5dp"
-                android:scaleType="fitXY"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-<!--            <androidx.cardview.widget.CardView-->
+            <!--            <androidx.cardview.widget.CardView-->
 <!--                android:id="@+id/cardView"-->
 <!--                android:layout_width="100dp"-->
 <!--                android:layout_height="100dp"-->
@@ -77,19 +65,57 @@
 
 <!--            </androidx.cardview.widget.CardView>-->
 
+            <!--            <com.example.a1week.CircularImageView-->
+<!--                android:id="@+id/contact_photo_imageview"-->
+<!--                android:layout_width="80dp"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginBottom="8dp"-->
+<!--                android:background="@color/white"-->
+<!--                android:clipToOutline="true"-->
+<!--                android:contentDescription="TODO"-->
+<!--                android:padding="5dp"-->
+<!--                android:scaleType="fitXY"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                tools:srcCompat="@tools:sample/backgrounds/scenic" />-->
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/contact_photo_imageview"
+                android:layout_width="87dp"
+                android:layout_height="87dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/baseline_person_24"
+                app:civ_border_color="#000000"
+                app:civ_border_overlay="true"
+                app:civ_border_width="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
 
             <TextView
                 android:id="@+id/txtName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/contact_text_name"
-                android:textColor="@color/black"
                 android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/black"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/txtPhoneNumber"
+                app:layout_constraintEnd_toStartOf="@+id/BtnDial"
+                app:layout_constraintHorizontal_bias="0.437"
                 app:layout_constraintStart_toEndOf="@+id/contact_photo_imageview"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,35 +124,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="24dp"
                 android:text="@string/contact_text_phoneNumber"
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textColor="#FF0000FF"
+                android:textColor="#2F2FA5"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/contact_photo_imageview" />
+                app:layout_constraintEnd_toStartOf="@+id/BtnMsg"
+                app:layout_constraintHorizontal_bias="0.435"
+                app:layout_constraintStart_toEndOf="@+id/contact_photo_imageview"
+                app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
             <ImageButton
                 android:id="@+id/BtnDial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="44dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:backgroundTint="#4CAF50"
+                android:background="@drawable/btn_round_call"
                 android:contentDescription="DialIcon"
                 app:layout_constraintBottom_toTopOf="@+id/BtnMsg"
+                app:layout_constraintCircleRadius="2000dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/baseline_call_24" />
 
             <ImageButton
                 android:id="@+id/BtnMsg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="44dp"
+                android:layout_height="43dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:backgroundTint="#FF9800"
+                android:background="@drawable/btn_round_message"
                 android:contentDescription="SMSIcon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

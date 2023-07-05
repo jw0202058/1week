@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Gallery"
     android:orientation="vertical">
     <!-- TODO: Update blank fragment layout -->
@@ -22,8 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="24dp"
-        android:backgroundTint="#A980F3"
-        android:src="@drawable/plus" />
+        android:backgroundTint="#FFFFFF"
+        android:src="@drawable/plus"
+        app:borderWidth="2dp"
+        />
 <!--    <androidx.recyclerview.widget.RecyclerView-->
 <!--        android:id="@+id/recyclerGridView"-->
 <!--        android:layout_width="match_parent"-->
