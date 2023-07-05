@@ -90,7 +90,7 @@
 
 ## TAB 3 : 투두리스트
 
-### 실행 화면
+### ![실행 화면](https://github.com/jw0202058/1week/blob/master/asset/%ED%95%A0%EC%9D%BC%20demo.gif)
 
 ### 상세 정보
 - onBindViewHolder(todoViewHolder: TodoViewHolder, position: Int): 이 함수는 RecyclerView에서 각 아이템을 화면에 표시할 때 호출됩니다. onBindViewHolder 함수는 아이템의 위치(position)에 해당하는 데이터를 가져와서 ViewHolder에 바인딩하는 역할을 합니다.
