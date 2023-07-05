@@ -10,7 +10,7 @@
 - [@모지훈](https://github.com/Morivy42) KAIST 전산학부 18학번
 
 
-## 개발 환경
+## [개발 환경] (https://github.com/jw0202058/1week#tab-2--%EA%B0%A4%EB%9F%AC%EB%A6%AC)
 
 * OS : Android
 * Language : Kotlin
