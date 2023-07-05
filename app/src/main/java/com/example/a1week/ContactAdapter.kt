@@ -3,11 +3,12 @@ package com.example.a1week
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a1week.model.Contact
+
 
 class ContactAdapter(private var contactClickListener: OnContactClickListener) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
     private val contactList: MutableList<Contact> = mutableListOf()
@@ -85,6 +86,11 @@ class ContactAdapter(private var contactClickListener: OnContactClickListener) :
             // Bind data to views within the item layout
             findViewById<TextView>(R.id.txtName).text = contact.name
             findViewById<TextView>(R.id.txtPhoneNumber).text = contact.phoneNumber
+            if (contact.photoUri == null) {
+                findViewById<ImageView>(R.id.contact_photo_imageview).setImageResource(R.drawable.baseline_person_24)
+            } else {
+                findViewById<ImageView>(R.id.contact_photo_imageview).setImageURI(contact.photoUri)
+            }
         }
 
 

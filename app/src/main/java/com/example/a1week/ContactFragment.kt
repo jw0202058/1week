@@ -3,6 +3,7 @@ package com.example.a1week
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentResolver
+import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -113,6 +114,7 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
                 while (it.moveToNext()) {
                     val id = it.getString(it.getColumnIndex(ContactsContract.Contacts._ID))
                     val name = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                    val photoUri = getContactPhotoUri(id)
 
                     val phoneCursor = contentResolver.query(
                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
@@ -125,7 +127,7 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
                     phoneCursor?.let { phoneCursor ->
                         while (phoneCursor.moveToNext()) {
                             val phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-                            val contact = Contact(id, name, phoneNumber, photoUri = null)
+                            val contact = Contact(id, name, phoneNumber, photoUri)
                             contacts.add(contact)
                         }
 
@@ -142,31 +144,31 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
     }
 
 
-//    @SuppressLint("Range")
-//    private fun getContactPhotoUri(contactId: String): Uri? {
-//        val contentResolver: ContentResolver = requireContext().contentResolver
-//        val projection = arrayOf(ContactsContract.Contacts.PHOTO_URI)
-//        val selection = ContactsContract.Contacts._ID + " = ?"
-//        val selectionArgs = arrayOf(contactId)
-//        val cursor = contentResolver.query(
-//            ContactsContract.Contacts.CONTENT_URI,
-//            projection,
-//            selection,
-//            selectionArgs,
-//            null
-//        )
-//
-//        cursor?.use {
-//            if (it.moveToFirst()) {
-//                val photoUriString = it.getString(it.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
-//                if (photoUriString != null) {
-//                    return Uri.parse(photoUriString)
-//                }
-//            }
-//        }
-//
-//        return null
-//    }
+    @SuppressLint("Range")
+    private fun getContactPhotoUri(contactId: String): Uri? {
+        val contentResolver: ContentResolver = requireContext().contentResolver
+        val projection = arrayOf(ContactsContract.Contacts.PHOTO_URI)
+        val selection = ContactsContract.Contacts._ID + " = ?"
+        val selectionArgs = arrayOf(contactId)
+        val cursor = contentResolver.query(
+            ContactsContract.Contacts.CONTENT_URI,
+            projection,
+            selection,
+            selectionArgs,
+            null
+        )
+
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val photoUriString = it.getString(it.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
+                if (photoUriString != null) {
+                    return Uri.parse(photoUriString)
+                }
+            }
+        }
+
+        return null
+    }
 //
 //
 //    private fun showContactPhoto(bitmap: Bitmap) {
