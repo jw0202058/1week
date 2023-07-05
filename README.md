@@ -84,7 +84,7 @@
 
 ```
 - 내부저장소에 저장
-* sharedpreferences
+  - sharedpreferences
 ```
 
 ```
