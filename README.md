@@ -27,7 +27,54 @@
 
 - 연락처 정보 (프로필 이미지, 이름, 전화번호) 불러오기
 ```
+@SuppressLint("Range")
+    private fun loadContacts() {
+        val contentResolver: ContentResolver = requireContext().contentResolver
 
+        // Query the contacts
+        val cursor = contentResolver.query(
+            ContactsContract.Contacts.CONTENT_URI,
+            null,
+            null,
+            null,
+            null
+        )
+
+        cursor?.let {
+            if (it.count > 0) {
+                val contacts = mutableListOf<Contact>()
+
+                while (it.moveToNext()) {
+                    val id = it.getString(it.getColumnIndex(ContactsContract.Contacts._ID))
+                    val name = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                    val photoUri = getContactPhotoUri(id)
+
+                    val phoneCursor = contentResolver.query(
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                        null,
+                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                        arrayOf(id),
+                        null
+                    )
+
+                    phoneCursor?.let { phoneCursor ->
+                        while (phoneCursor.moveToNext()) {
+                            val phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                            val contact = Contact(id, name, phoneNumber, photoUri)
+                            contacts.add(contact)
+                        }
+
+                        phoneCursor.close()
+                    }
+                }
+
+                adapter.setData(contacts)
+            }
+
+            it.close()
+
+        }
+    }
 ```
 Intent와 Content resolver로 이미지, 이름 전화번호 정보를 가져온다.
 
