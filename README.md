@@ -42,18 +42,18 @@
 
 ### 상세 정보
 - 사용자 갤러리에 접근해서 사진 불러와서 추가
+* gridView, recyclerView
 ```
-* 그리드뷰
-
-* 리사이클러뷰
 
 ```
 - 사진 삭제
 ```
 
+
 ```
 - 애플리케이션 내부저장소에 저장하기
 ```
+
 
 ```
 
@@ -64,27 +64,27 @@
 ### 상세 정보
 
 - 새 할 일 추가
-```
 * AddButton
+```
 
 ```
 - 할 일 수정
-```
 * setOnLongClickListener
+```
 
 ```
 - 완료 표시
-```
 * imageView, visible
+```
 
 ```
 - 할 일 삭제
-```
 * imageView, setClickListener
+```
 
 ```
 - 내부저장소에 저장
-```
 * sharedpreferences
+```
 
 ```
