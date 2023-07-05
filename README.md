@@ -25,64 +25,32 @@
 
 ### 상세 정보
 연락처 정보 (프로필 이미지, 이름, 전화번호) 불러오기
--onCreateView: Fragment가 생성될 때 호출되는 메서드로, 화면을 구성합니다. RecyclerView와 ContactAdapter를 초기화하고, 연락처에 대한 권한이 있는지 확인한 후에 연락처를 불러옵니다.
--onContactClick: 연락처를 클릭했을 때 호출되는 메서드로, 클릭한 연락처의 이름을 토스트 메시지로 보여줍니다. 원하는 동작을 구현할 수 있습니다.
--onContactLongClick: 연락처를 길게 눌렀을 때 호출되는 메서드로, 연락처의 상세 정보를 보여주는 다이얼로그를 표시합니다.
--onDialButtonClick: 연락처의 다이얼 버튼을 클릭했을 때 호출되는 메서드로, 해당 연락처에 전화를 걸기 위해 다이얼 액티비티를 실행합니다.
--onMsgButtonClick: 연락처의 메시지 버튼을 클릭했을 때 호출되는 메서드로, 해당 연락처에 메시지를 보내기 위해 메시지 액티비티를 실행합니다.
--loadContacts: 연락처를 불러오는 메서드로, ContentResolver를 사용하여 연락처 목록을 쿼리하고, Contact 객체로 변환하여 어댑터에 전달합니다.
--getContactPhotoUri: 연락처의 사진 URI를 가져오는 메서드로, ContentResolver를 사용하여 연락처의 사진 URI를 조회합니다.
--onRequestPermissionsResult: 앱이 연락처에 대한 권한 요청 후 결과를 처리하는 메서드입니다.
+- onCreateView: Fragment가 생성될 때 호출되는 메서드로, 화면을 구성합니다. RecyclerView와 ContactAdapter를 초기화하고, 연락처에 대한 권한이 있는지 확인한 후에 연락처를 불러옵니다.
+- onContactClick: 연락처를 클릭했을 때 호출되는 메서드로, 클릭한 연락처의 이름을 토스트 메시지로 보여줍니다. 원하는 동작을 구현할 수 있습니다.
+- onContactLongClick: 연락처를 길게 눌렀을 때 호출되는 메서드로, 연락처의 상세 정보를 보여주는 다이얼로그를 표시합니다.
+- onDialButtonClick: 연락처의 다이얼 버튼을 클릭했을 때 호출되는 메서드로, 해당 연락처에 전화를 걸기 위해 다이얼 액티비티를 실행합니다.
+- onMsgButtonClick: 연락처의 메시지 버튼을 클릭했을 때 호출되는 메서드로, 해당 연락처에 메시지를 보내기 위해 메시지 액티비티를 실행합니다.
+- loadContacts: 연락처를 불러오는 메서드로, ContentResolver를 사용하여 연락처 목록을 쿼리하고, Contact 객체로 변환하여 어댑터에 전달합니다.
+- getContactPhotoUri: 연락처의 사진 URI를 가져오는 메서드로, ContentResolver를 사용하여 연락처의 사진 URI를 조회합니다.
+- onRequestPermissionsResult: 앱이 연락처에 대한 권한 요청 후 결과를 처리하는 메서드입니다.
 
-- 전화 앱 연결: 전화 버튼을 누르면 전화 앱으로 연결하고 번호 입력
-```
-// ContactAdapter.kt
-...
-override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        val contact = contactList[position]
-        holder.itemView.apply {
-            // Bind data to views within the item layout
-            findViewById<TextView>(R.id.txtName).text = contact.name
-            findViewById<TextView>(R.id.txtPhoneNumber).text = contact.phoneNumber
-            if (contact.photoUri == null) {
-                findViewById<ImageView>(R.id.contact_photo_imageview).setImageResource(R.drawable.baseline_person_24)
-            } else {
-                findViewById<ImageView>(R.id.contact_photo_imageview).setImageURI(contact.photoUri)
-            }
-        }
-    }
-...
+ 전화 앱 연결: 전화 버튼을 누르면 전화 앱으로 연결하고 번호 입력
+ 메시지 앱 연결: 메시지 버튼을 누르면 메시지 앱으로 연결하고 번호 입력
+  
+- ContactAdapter.kt의 onBindViewHolder 메서드:
+        onBindViewHolder 메서드는 RecyclerView의 각 아이템에 데이터를 바인딩하는 역할을 합니다. 코드에서는 contactList에서 해당 position에 있는 연락처를 가져와서 ViewHolder의 뷰에 데이터를 설정합니다.
+        findViewById<TextView>(R.id.txtName).text = contact.name: 연락처의 이름을 TextView에 설정합니다.
+        findViewById<TextView>(R.id.txtPhoneNumber).text = contact.phoneNumber: 연락처의 전화번호를 TextView에 설정합니다.
+        if (contact.photoUri == null) { ... } else { ... }: 연락처의 사진 URI가 null인 경우 기본 이미지를 ImageView에 설정하고, null이 아닌 경우 해당 URI로 ImageView의 이미지를 설정합니다.
+        ContactFragment.kt의 onDialButtonClick 메서드:
+        onDialButtonClick 메서드는 연락처의 다이얼 버튼을 클릭했을 때 호출되는 메서드입니다. 해당 연락처의 전화번호를 가져와서 tel: 스키마와 함께 Uri를 생성하고, ACTION_DIAL 인텐트를 사용하여 다이얼 액티비티를 실행합니다. 사용자는 전화를 걸기 위한 다이얼 패드가 표시됩니다.
 
-// ContactFragment.kt
-...
-    override fun onDialButtonClick(contact: Contact, position: Int) {
-        Toast.makeText(context, "Dial to ${contact.name}", Toast.LENGTH_SHORT).show()
-        val phoneNumber = contact.phoneNumber
-        val phoneNumUri = Uri.parse("tel:$phoneNumber")
-        val dialIntent = Intent(Intent.ACTION_DIAL, phoneNumUri)
-        startActivity(dialIntent)
-    }
-...
-
-```
-- 메시지 앱 연결: 메시지 버튼을 누르면 메시지 앱으로 연결하고 번호 입력
-```
-// ContactFragment.kt
-...
-    override fun onMsgButtonClick(contact: Contact, position: Int) {
-        val phoneNumber = contact.phoneNumber
-        val phoneNumUri = Uri.parse("smsto:$phoneNumber")
-        val msgIntent = Intent(Intent.ACTION_SENDTO, phoneNumUri)
-        msgIntent.putExtra("sms_body", "Here goes your message...")
-        startActivity(msgIntent)
-    }
-...
-
-```
+- ContactFragment.kt의 onMsgButtonClick 메서드:
+        onMsgButtonClick 메서드는 연락처의 메시지 버튼을 클릭했을 때 호출되는 메서드입니다. 해당 연락처의 전화번호를 가져와서 smsto: 스키마와 함께 Uri를 생성하고, ACTION_SENDTO 인텐트를 사용하여 메시지 액티비티를 실행합니다. sms_body라는 추가 데이터로 기본적인 메시지 내용을 설정할 수 있습니다. 사용자는 메시지 작성 화면이 열리고, 지정된 전화번호로 메시지를 보낼 수 있습니다.
 
 ## TAB 2 : 갤러리
 
-### 실행 화면
+### ![실행 화면](https://github.com/jw0202058/1week/assets/86469551/0a9a852b-01d4-47dc-a724-851ed2432287)
 
 ### 상세 정보
 - onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?: 이 함수는 프래그먼트의 레이아웃을 인플레이트하고 루트 뷰를 반환합니다. R.layout.fragment_gallery 레이아웃을 인플레이트한 후, GridView와 어댑터를 초기화하고 FloatingActionButton의 클릭 이벤트를 설정합니다. 그리고 이미지들을 내부 저장소에서 로드하여 GridView에 표시합니다.
