@@ -93,7 +93,16 @@
     }
     ```
 - 사진 삭제
-
+  - removeImage(position) 함수가 position 매개변수로 전달된 위치에 있는 이미지를 삭제
+    ``` kotlin
+            private fun removeImage(position: Int) {
+            val bitmap = picID[position]
+            picID.removeAt(position)
+            notifyDataSetChanged()
+            deleteImageFromStorage(bitmap)
+            Toast.makeText(requireContext(), "사진이 삭제되었습니다", Toast.LENGTH_SHORT).show()
+        }
+    ```
 
 ## TAB 3 : 투두리스트
 
