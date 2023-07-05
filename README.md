@@ -42,7 +42,7 @@
 
 ### 상세 정보
 - 사용자 갤러리에 접근해서 사진 불러와서 추가
-* gridView, recyclerView
+  - gridView, recyclerView
 ```
 
 ```
@@ -64,22 +64,22 @@
 ### 상세 정보
 
 - 새 할 일 추가
-* AddButton
+  - AddButton
 ```
 
 ```
 - 할 일 수정
-* setOnLongClickListener
+  - setOnLongClickListener
 ```
 
 ```
 - 완료 표시
-* imageView, visible
+  - imageView, visible
 ```
 
 ```
 - 할 일 삭제
-* imageView, setClickListener
+  - imageView, setClickListener
 ```
 
 ```
