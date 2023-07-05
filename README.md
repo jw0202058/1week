@@ -29,12 +29,51 @@
 ```
 
 ```
+Intent와 Content resolver로 이미지, 이름 전화번호 정보를 가져온다.
+
 - 전화 앱 연결: 전화 버튼을 누르면 전화 앱으로 연결하고 번호 입력
 ```
+// ContactAdapter.kt
+...
+override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
+        val contact = contactList[position]
+        holder.itemView.apply {
+            // Bind data to views within the item layout
+            findViewById<TextView>(R.id.txtName).text = contact.name
+            findViewById<TextView>(R.id.txtPhoneNumber).text = contact.phoneNumber
+            if (contact.photoUri == null) {
+                findViewById<ImageView>(R.id.contact_photo_imageview).setImageResource(R.drawable.baseline_person_24)
+            } else {
+                findViewById<ImageView>(R.id.contact_photo_imageview).setImageURI(contact.photoUri)
+            }
+        }
+    }
+...
+
+// ContactFragment.kt
+...
+    override fun onDialButtonClick(contact: Contact, position: Int) {
+        Toast.makeText(context, "Dial to ${contact.name}", Toast.LENGTH_SHORT).show()
+        val phoneNumber = contact.phoneNumber
+        val phoneNumUri = Uri.parse("tel:$phoneNumber")
+        val dialIntent = Intent(Intent.ACTION_DIAL, phoneNumUri)
+        startActivity(dialIntent)
+    }
+...
 
 ```
 - 메시지 앱 연결: 메시지 버튼을 누르면 메시지 앱으로 연결하고 번호 입력
 ```
+// ContactFragment.kt
+...
+    override fun onMsgButtonClick(contact: Contact, position: Int) {
+        val phoneNumber = contact.phoneNumber
+        val phoneNumUri = Uri.parse("smsto:$phoneNumber")
+        val msgIntent = Intent(Intent.ACTION_SENDTO, phoneNumUri)
+        msgIntent.putExtra("sms_body", "Here goes your message...")
+        startActivity(msgIntent)
+    }
+...
 
 ```
 
