@@ -18,7 +18,7 @@
 * Target Device : Galaxy S7
 
 ## TAB 1 : 연락처
-### 실행 화면
+### ![실행 화면](https://github.com/jw0202058/1week/blob/master/asset/%EC%97%B0%EB%9D%BD%EC%B2%98%20demo.gif)
 
 
 ### 상세 정보
@@ -38,7 +38,8 @@
 
 ## TAB 2 : 갤러리
 
-### 실행 화면
+### ![실행 화면](https://github.com/jw0202058/1week/blob/master/asset/%EA%B0%A4%EB%9F%AC%EB%A6%AC%20demo.gif)
+
 
 ### 상세 정보
 - 사용자 갤러리에 접근해서 사진 불러와서 추가
@@ -106,7 +107,7 @@
 
 ## TAB 3 : 투두리스트
 
-### 실행 화면
+### ![실행 화면](https://github.com/jw0202058/1week/blob/master/asset/%ED%95%A0%EC%9D%BC%20demo.gif)
 
 ### 상세 정보
 
