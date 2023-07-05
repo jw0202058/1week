@@ -24,59 +24,15 @@
 
 
 ### 상세 정보
-
-- 연락처 정보 (프로필 이미지, 이름, 전화번호) 불러오기
-```
-@SuppressLint("Range")
-    private fun loadContacts() {
-        val contentResolver: ContentResolver = requireContext().contentResolver
-
-        // Query the contacts
-        val cursor = contentResolver.query(
-            ContactsContract.Contacts.CONTENT_URI,
-            null,
-            null,
-            null,
-            null
-        )
-
-        cursor?.let {
-            if (it.count > 0) {
-                val contacts = mutableListOf<Contact>()
-
-                while (it.moveToNext()) {
-                    val id = it.getString(it.getColumnIndex(ContactsContract.Contacts._ID))
-                    val name = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-                    val photoUri = getContactPhotoUri(id)
-
-                    val phoneCursor = contentResolver.query(
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                        null,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-                        arrayOf(id),
-                        null
-                    )
-
-                    phoneCursor?.let { phoneCursor ->
-                        while (phoneCursor.moveToNext()) {
-                            val phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-                            val contact = Contact(id, name, phoneNumber, photoUri)
-                            contacts.add(contact)
-                        }
-
-                        phoneCursor.close()
-                    }
-                }
-
-                adapter.setData(contacts)
-            }
-
-            it.close()
-
-        }
-    }
-```
-Intent와 Content resolver로 이미지, 이름 전화번호 정보를 가져온다.
+연락처 정보 (프로필 이미지, 이름, 전화번호) 불러오기
+-onCreateView: Fragment가 생성될 때 호출되는 메서드로, 화면을 구성합니다. RecyclerView와 ContactAdapter를 초기화하고, 연락처에 대한 권한이 있는지 확인한 후에 연락처를 불러옵니다.
+-onContactClick: 연락처를 클릭했을 때 호출되는 메서드로, 클릭한 연락처의 이름을 토스트 메시지로 보여줍니다. 원하는 동작을 구현할 수 있습니다.
+-onContactLongClick: 연락처를 길게 눌렀을 때 호출되는 메서드로, 연락처의 상세 정보를 보여주는 다이얼로그를 표시합니다.
+-onDialButtonClick: 연락처의 다이얼 버튼을 클릭했을 때 호출되는 메서드로, 해당 연락처에 전화를 걸기 위해 다이얼 액티비티를 실행합니다.
+-onMsgButtonClick: 연락처의 메시지 버튼을 클릭했을 때 호출되는 메서드로, 해당 연락처에 메시지를 보내기 위해 메시지 액티비티를 실행합니다.
+-loadContacts: 연락처를 불러오는 메서드로, ContentResolver를 사용하여 연락처 목록을 쿼리하고, Contact 객체로 변환하여 어댑터에 전달합니다.
+-getContactPhotoUri: 연락처의 사진 URI를 가져오는 메서드로, ContentResolver를 사용하여 연락처의 사진 URI를 조회합니다.
+-onRequestPermissionsResult: 앱이 연락처에 대한 권한 요청 후 결과를 처리하는 메서드입니다.
 
 - 전화 앱 연결: 전화 버튼을 누르면 전화 앱으로 연결하고 번호 입력
 ```
