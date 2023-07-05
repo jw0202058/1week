@@ -51,8 +51,46 @@ class Gallery : Fragment() {
                 requestPermission()
             }
         }
+        loadImagesFromStorage()
 
         return view
+    }
+
+    private fun addImageToStorage(bitmap: Bitmap) {
+        try {
+            val imageFileName = "image_${System.currentTimeMillis()}.png"
+            val fileOutputStream = requireContext().openFileOutput(imageFileName, Context.MODE_PRIVATE)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
+            fileOutputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(
+                requireContext(),
+                "Failed to save image",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun loadImagesFromStorage() {
+        try {
+            val imageFiles = requireContext().filesDir.listFiles()
+            if (imageFiles != null) {
+                for (imageFile in imageFiles) {
+                    val bitmap = BitmapFactory.decodeFile(imageFile.absolutePath)
+                    if (bitmap != null) {
+                        gAdapter.addImage(bitmap)
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(
+                requireContext(),
+                "Failed to load images",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     private fun checkPermission(): Boolean {
@@ -101,6 +139,7 @@ class Gallery : Fragment() {
                 val bitmap = decodeUriToBitmap(requireContext(), selectedImageUri)
                 if (bitmap != null) {
                     gAdapter.addImage(bitmap)
+                    addImageToStorage(bitmap) // Save image to internal storage
                 } else {
                     Toast.makeText(
                         requireContext(),
@@ -179,11 +218,33 @@ class Gallery : Fragment() {
         }
 
         private fun removeImage(position: Int) {
+            val bitmap = picID[position]
             picID.removeAt(position)
             notifyDataSetChanged()
+            deleteImageFromStorage(bitmap)
             Toast.makeText(requireContext(), "사진이 삭제되었습니다", Toast.LENGTH_SHORT).show()
         }
-
+        private fun deleteImageFromStorage(bitmap: Bitmap) {
+            try {
+                val imageFiles = requireContext().filesDir.listFiles()
+                if (imageFiles != null) {
+                    for (imageFile in imageFiles) {
+                        val storedBitmap = BitmapFactory.decodeFile(imageFile.absolutePath)
+                        if (storedBitmap != null && bitmap.sameAs(storedBitmap)) {
+                            imageFile.delete()
+                            break
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to delete image",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
         fun addImage(bitmap: Bitmap) {
             picID.add(0, bitmap)
             notifyDataSetChanged()
