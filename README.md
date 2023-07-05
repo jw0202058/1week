@@ -64,13 +64,12 @@
 ### 상세 정보
 
 - 새 할 일 추가
-  - AddButton
-```
-새 할 일을 추가하기 위해 fabMain (FloatingActionButton)을 클릭하면 openGallery() 함수가 호출됩니다.
-이 함수는 갤러리에서 이미지를 선택하는 인텐트를 실행합니다.
-사용자가 이미지를 선택하면 onActivityResult() 메서드가 호출되고 선택한 이미지를 Bitmap으로 변환하여
-gAdapter.addImage(bitmap)와 addImageToStorage(bitmap) 함수를 호출하여 이미지를 GridView에 추가하고 애플리케이션 내부 저장소에 저장합니다.
-```
+  - 새 할 일을 추가하기 위해 fabMain (FloatingActionButton) 클릭시, openGallery() 함수 호출
+  - 이 함수는 갤러리에서 이미지를 선택하는 intent를 실행
+  - 사용자가 이미지를 선택하면 onActivityResult() 메서드가 호출되고 선택한 이미지를 Bitmap으로 변환
+  - gAdapter.addImage(bitmap)와 addImageToStorage(bitmap) 함수를 호출하여 이미지를 GridView에 추가
+  - 애플리케이션 내부 저장소에 할 일 저장
+
 - 할 일 수정
   - setOnLongClickListener
 ```
