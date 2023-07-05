@@ -42,28 +42,6 @@
 
 ### 상세 정보
 - 사용자 갤러리에 접근해서 사진 불러와서 추가
-  - gridView, recyclerView
-```
-
-```
-- 사진 삭제
-```
-
-
-```
-- 애플리케이션 내부저장소에 저장
-```
-
-
-```
-
-## TAB 3 : 투두리스트
-
-### 실행 화면
-
-### 상세 정보
-
-- 새 할 일 추가
   - 새 할 일을 추가하기 위해 fabMain (FloatingActionButton) 클릭시, openGallery() 함수 호출
   - 이 함수는 갤러리에서 이미지를 선택하는 intent를 실행
   ``` kotlin
@@ -72,7 +50,7 @@
         startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE)
     }
   ```
-  - 사용자가 이미지를 선택하면 onActivityResult() 메서드가 호출되고 선택한 이미지를 Bitmap으로 변환
+    - 사용자가 이미지를 선택하면 onActivityResult() 메서드가 호출되고 선택한 이미지를 Bitmap으로 변환
   ``` kotlin
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == RESULT_OK && data != null) {
@@ -93,7 +71,7 @@
         }
     }
   ```
-  - gAdapter.addImage(bitmap)와 addImageToStorage(bitmap) 함수를 호출하여 이미지를 GridView에 추가
+    - gAdapter.addImage(bitmap)와 addImageToStorage(bitmap) 함수를 호출하여 이미지를 GridView에 추가
   - 애플리케이션 내부 저장소에 할 일 저장
   ``` kotlin
       private fun addImageToStorage(bitmap: Bitmap) {
@@ -112,6 +90,26 @@
         }
     }
   ```
+- 사진 삭제
+```
+
+
+```
+- 애플리케이션 내부저장소에 저장
+```
+
+
+```
+
+## TAB 3 : 투두리스트
+
+### 실행 화면
+
+### 상세 정보
+
+- 새 할 일 추가
+
+
 - 할 일 수정
   - setOnLongClickListener
 ```
