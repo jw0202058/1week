@@ -73,12 +73,11 @@ class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
 //            showContactPhoto(photoBitmap)
 //        }
     }
-
     override fun onContactLongClick(contact: Contact, position: Int) {
-        // Handle item long click event
-        Toast.makeText(context, "Long clicked on ${contact.phoneNumber}", Toast.LENGTH_SHORT).show()
-        // Implement your desired action for long clicking a contact
+        val contactDetailFragment = ContactDetailFragment.newInstance(contact)
+        contactDetailFragment.show(parentFragmentManager, "contact_detail")
     }
+
 
     override fun onDialButtonClick(contact: Contact, position: Int) {
         Toast.makeText(context, "Dial to ${contact.name}", Toast.LENGTH_SHORT).show()
