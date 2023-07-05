@@ -3,18 +3,14 @@ package com.example.a1week
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentResolver
-import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -22,6 +18,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a1week.model.Contact
+//import android.widget.ImageView
+//import android.content.ContentUris
+//import android.provider.MediaStore
+//import android.graphics.Bitmap
 
 class ContactFragment : Fragment(), ContactAdapter.OnContactClickListener {
     private lateinit var recyclerView: RecyclerView

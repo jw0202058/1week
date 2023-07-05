@@ -27,9 +27,9 @@ class ContactAdapter(private var contactClickListener: OnContactClickListener) :
         fun onMsgButtonClick(contact: Contact, position: Int)
     }
 
-    fun setContactClickListener(onContactClickListener: OnContactClickListener) {
-        contactClickListener = onContactClickListener
-    }
+//    fun setContactClickListener(onContactClickListener: OnContactClickListener) {
+//        contactClickListener = onContactClickListener
+//    }
 
     // ViewHolder class for the individual items in the RecyclerView
     inner class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -37,7 +37,7 @@ class ContactAdapter(private var contactClickListener: OnContactClickListener) :
         val msgButton: AppCompatImageButton = itemView.findViewById(R.id.BtnMsg)
         init {
             itemView.setOnClickListener {
-                val position = adapterPosition
+                val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val contact = contactList[position]
                     contactClickListener.onContactClick(contact, position)
@@ -45,7 +45,7 @@ class ContactAdapter(private var contactClickListener: OnContactClickListener) :
             }
 
             itemView.setOnLongClickListener {
-                val position = adapterPosition
+                val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val contact = contactList[position]
                     contactClickListener.onContactLongClick(contact, position)
@@ -54,7 +54,7 @@ class ContactAdapter(private var contactClickListener: OnContactClickListener) :
             }
 
             dialButton.setOnClickListener {
-                val position = adapterPosition
+                val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val contact = contactList[position]
                     contactClickListener.onDialButtonClick(contact, position)
@@ -62,7 +62,7 @@ class ContactAdapter(private var contactClickListener: OnContactClickListener) :
             }
 
             msgButton.setOnClickListener {
-                val position = adapterPosition
+                val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val contact = contactList[position]
                     contactClickListener.onMsgButtonClick(contact, position)
